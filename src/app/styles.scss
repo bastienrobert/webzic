@@ -1,0 +1,18 @@
+@import 'reset-css';
+
+// @font-face {
+//   font-family: 'Open Sans';
+//   src: url(../assets/fonts/opensans-bold-webfont.woff2) format('woff2'),
+//     url(../assets/fonts/opensans-bold-webfont.woff) format('woff'),
+//     url(../assets/fonts/opensans-bold-webfont.ttf) format('truetype');
+//   font-weight: 700;
+//   font-style: normal;
+// }
+
+:global {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: none;
+    overflow-x: hidden;
+  }
+}
