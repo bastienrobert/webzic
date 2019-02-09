@@ -3,12 +3,12 @@ import page from 'page'
 
 import { generateGuid } from 'utils/helpers'
 import routes from 'src/app/routes'
+import Houdini from 'components/houdini'
 import values from 'values'
 
 export default class Router extends Component {
   state = {
     firstPage: true,
-    locale: values.locale,
     previousRouteName: null,
     previousRoute: null,
     currentRouteName: null,
@@ -21,34 +21,6 @@ export default class Router extends Component {
     const locale = values.locale
     const find = routes.routes.find(({ name }) => name === route)
     return find ? find.paths[locale] || find.paths['all'] : null
-  }
-
-  static getRouteWithParams(path, params) {
-    return Object.keys(params).reduce(
-      (acc, key) =>
-        acc.replace(
-          new RegExp(':' + key + '(\\?|\\*)?', 'i'),
-          params[key] || ''
-        ),
-      path
-    )
-  }
-
-  static linkResolver = doc => {
-    const matchingRoute = routes.routes.find(
-      ({ name }) => name === (doc.type || null)
-    )
-    if (matchingRoute) {
-      const locale = values.locale
-      const localizedPath =
-        matchingRoute.paths[locale] || matchingRoute.paths['all']
-
-      const slug = doc.data ? doc.data.slug : null
-
-      return Router.getRouteWithParams(localizedPath, { slug })
-    }
-
-    return '/'
   }
 
   static goto = path => {
@@ -66,7 +38,7 @@ export default class Router extends Component {
 
     routes.routes.forEach(route => {
       const { paths } = route
-      const path = paths.all || paths[this.state.locale]
+      const path = paths.all || paths[values.locale]
 
       page(path, ctx => {
         return this.setState(state => {
@@ -106,16 +78,66 @@ export default class Router extends Component {
       const currentIndex = this.state.pages.length - 1
 
       if (previousIndex === currentIndex) return
+      const currentComponent = this.pages[currentIndex]
       const previousGuid = this.state.pages[previousIndex].guid
 
-      this.destroyPage(previousGuid)
+      const controller = Houdini.getTransitionController({
+        fromContext: {
+          page: this.state.pages[previousIndex],
+          component: this.pages[previousIndex]
+        },
+        toContext: {
+          page: this.state.pages[currentIndex],
+          component: this.pages[currentIndex]
+        }
+      })
+
+      currentComponent.willAppear && currentComponent.willAppear()
+      controller.transition().then(() => {
+        currentComponent.didAppear && currentComponent.didAppear()
+        this.destroyPage(previousGuid)
+      })
+    } else {
+      const currentIndex = this.getRouteIndex(this.state.currentRoute)
+      const component = this.pages[currentIndex]
+
+      const controller = Houdini.getTransitionController({
+        toContext: {
+          page: this.state.pages[currentIndex],
+          component: this.pages[currentIndex]
+        }
+      })
+
+      component.willAppear && component.willAppear()
+      controller.transition().then(() => {
+        component.didAppear && component.didAppear()
+      })
     }
   }
 
   renderNotFound = () => {
-    this.setState(state => {
-      return this.getPageData({ name: 'notfound' }, state, { path: '*' }, true)
-    })
+    this.setState(
+      state => {
+        return this.getPageData(
+          { name: 'notfound' },
+          state,
+          { path: '*' },
+          true
+        )
+      },
+      () => {
+        const currentIndex = this.getRouteIndex(this.state.currentRoute)
+
+        const controller = Houdini.getTransitionController({
+          toContext: {
+            page: this.state.pages[currentIndex],
+            component: this.pages[currentIndex]
+          }
+        })
+
+        controller.transition()
+      }
+    )
   }
 
   destroyPage(guid) {

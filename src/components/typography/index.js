@@ -7,9 +7,9 @@ const cx = classnames.bind(css)
 export default class Typography extends Component {
   render() {
     const childrenStyle = cx(this.props.className, this.props.theme, {
-      title: this.props.type === 'title',
-      subtitle: this.props.type === 'subtitle',
-      text: this.props.type === 'text'
+      title: this.props.title,
+      subtitle: this.props.subtitle,
+      text: this.props.text
     })
 
     return React.Children.map(this.props.children, child => {

@@ -1,0 +1,11 @@
+.Home {
+  composes: page from global;
+
+  font-family: $font;
+  background-color: blue;
+
+  .title {
+    color: $white;
+    margin-bottom: 20px;
+  }
+}

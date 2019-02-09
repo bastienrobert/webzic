@@ -1,0 +1,6 @@
+.NotFound {
+  composes: page from global;
+
+  font-family: $font;
+  background-color: green;
+}

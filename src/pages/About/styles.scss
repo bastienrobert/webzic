@@ -1,0 +1,11 @@
+.About {
+  composes: page from global;
+
+  font-family: $font;
+  background-color: red;
+
+  .title {
+    color: $white;
+    margin-bottom: 20px;
+  }
+}
