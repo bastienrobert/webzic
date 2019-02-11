@@ -6,6 +6,8 @@ import routes from 'src/app/routes'
 import Houdini from 'components/houdini'
 import values from 'values'
 
+// import Loader from 'components/shared/Loader'
+
 export default class Router extends Component {
   state = {
     firstPage: true,
@@ -21,6 +23,18 @@ export default class Router extends Component {
     const locale = values.locale
     const find = routes.routes.find(({ name }) => name === route)
     return find ? find.paths[locale] || find.paths['all'] : null
+  }
+
+  static getRouteWithParams(name, params) {
+    const path = Router.getPath(name)
+    return Object.keys(params).reduce(
+      (acc, key) =>
+        acc.replace(
+          new RegExp(':' + key + '(\\?|\\*)?', 'i'),
+          params[key] || ''
+        ),
+      path
+    )
   }
 
   static goto = path => {
@@ -108,6 +122,12 @@ export default class Router extends Component {
         }
       })
 
+      // this.refs.loader.animateOut().then(() => {
+      //   component.willAppear && component.willAppear()
+      //   controller.transition().then(() => {
+      //     component.didAppear && component.didAppear()
+      //   })
+      // })
       component.willAppear && component.willAppear()
       controller.transition().then(() => {
         component.didAppear && component.didAppear()
@@ -169,6 +189,7 @@ export default class Router extends Component {
 
     return (
       <React.Fragment>
+        {/* <Loader ref="loader" /> */}
         {this.state.pages.map(page => {
           return (
             <page.route.component

@@ -5,7 +5,7 @@ class Values {
   }
 
   init() {
-    this.locale = 'fr'
+    this.locale = 'en'
 
     this.viewport = {
       width: 0,

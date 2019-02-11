@@ -1,0 +1,23 @@
+.Loader {
+  composes: page from global;
+
+  font-family: $font;
+  background-color: $wildSand;
+  z-index: 2;
+
+  .text {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-60%);
+
+    .title {
+      text-align: center;
+    }
+
+    .subtitle {
+      transform: translateY(-60px);
+      text-align: center;
+    }
+  }
+}

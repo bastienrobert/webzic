@@ -1,4 +1,5 @@
 import Home from 'pages/Home'
+import Experiences from 'pages/Experiences'
 import About from 'pages/About'
 import NotFound from 'pages/NotFound'
 
@@ -13,6 +14,13 @@ export default {
       },
       negative: true,
       component: Home
+    },
+    {
+      name: 'experiences',
+      paths: {
+        all: '/experiences/:slug'
+      },
+      component: Experiences
     },
     {
       name: 'about',

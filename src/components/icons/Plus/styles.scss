@@ -1,0 +1,22 @@
+.Plus {
+  position: absolute;
+  margin-left: 3px;
+  margin-top: 10px;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 2px;
+  }
+
+  &:before {
+    background-color: $silver;
+  }
+
+  &:after {
+    background-color: $silver;
+    transform: rotate(90deg);
+  }
+}

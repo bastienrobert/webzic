@@ -1,0 +1,28 @@
+.Chart {
+  display: inline-block;
+  position: relative;
+  width: 23px;
+  height: 30px;
+
+  div {
+    position: absolute;
+    display: inline-block;
+    width: 2px;
+    bottom: 0;
+    background-color: $silver;
+  }
+
+  div:nth-child(1) {
+    height: 100%;
+  }
+
+  div:nth-child(2) {
+    height: 60%;
+    left: 10px;
+  }
+
+  div:nth-child(3) {
+    height: 80%;
+    left: 20px;
+  }
+}

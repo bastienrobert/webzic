@@ -1,0 +1,12 @@
+.Separator {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  transform: translateY(-50%);
+  background-color: $silver;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}

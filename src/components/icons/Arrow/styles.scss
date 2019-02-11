@@ -1,0 +1,9 @@
+.Arrow {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  box-sizing: border-box;
+  border-top: 2px solid $silver;
+  border-left: 2px solid $silver;
+  transform: rotate(45deg);
+}
