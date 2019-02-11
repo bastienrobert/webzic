@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom'
 import TransitionController from '../TransitionController'
 
-import { Expo, TweenMax } from 'gsap/all'
+import { TweenMax, Expo } from 'gsap/all'
 import values from 'values'
 
 class SlideTransition extends TransitionController {
