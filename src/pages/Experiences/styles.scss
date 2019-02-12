@@ -1,3 +1,67 @@
 .Experiences {
   composes: page from global;
+
+  display: flex;
+  background-color: $mineShaft;
+
+  .left,
+  .right {
+    @include column;
+    position: relative;
+    height: 100%;
+  }
+
+  .left {
+    left: 0;
+    border-right: 1px solid $tundora;
+  }
+
+  .center {
+    flex: 1;
+    // margin-top: 130px;
+
+    .footer {
+      position: absolute;
+      left: 50%;
+      bottom: 70px;
+      transform: translateX(-50%);
+
+      .text {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .right {
+    right: 0;
+    border-left: 1px solid $tundora;
+
+    .top,
+    .bottom {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-40%) rotate(-90deg);
+
+      .text {
+        margin-left: 20px;
+
+        span {
+          display: block;
+          padding-top: 6px;
+        }
+      }
+    }
+
+    .top {
+      top: 70px;
+
+      .close {
+        transform: translate(3px, -3px) rotate(45deg);
+      }
+    }
+
+    .bottom {
+      bottom: 70px;
+    }
+  }
 }

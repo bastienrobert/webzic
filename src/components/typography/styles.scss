@@ -1,8 +1,16 @@
-.title {
+.title,
+.name {
   font-family: $font;
-  font-size: 80px;
   text-transform: uppercase;
   color: $mineShaft;
+}
+
+.title {
+  font-size: 80px;
+}
+
+.name {
+  font-size: 60px;
 }
 
 .subtitle {
@@ -16,4 +24,8 @@
   font-family: $font;
   font-size: 16px;
   color: $mineShaft;
+}
+
+.negative {
+  color: $mercury;
 }

@@ -1,5 +1,6 @@
 import Home from 'pages/Home'
 import Experiences from 'pages/Experiences'
+import Experience from 'pages/Experience'
 import About from 'pages/About'
 import NotFound from 'pages/NotFound'
 
@@ -18,9 +19,16 @@ export default {
     {
       name: 'experiences',
       paths: {
-        all: '/experiences/:slug'
+        all: '/experiences'
       },
       component: Experiences
+    },
+    {
+      name: 'experience',
+      paths: {
+        all: '/experiences/:slug'
+      },
+      component: Experience
     },
     {
       name: 'about',

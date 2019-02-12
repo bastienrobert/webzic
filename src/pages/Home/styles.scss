@@ -1,14 +1,13 @@
 .Home {
   composes: page from global;
 
+  display: flex;
   background-color: $wildSand;
 
   .left,
   .right {
-    position: absolute;
-    top: 0;
-    width: 15%;
-    max-width: 300px;
+    @include column;
+    position: relative;
     height: 100%;
   }
 
@@ -30,6 +29,21 @@
     .bottom {
       bottom: 70px;
       transform: translateX(-40%) rotate(225deg);
+    }
+  }
+
+  .center {
+    flex: 1;
+
+    .footer {
+      position: absolute;
+      left: 50%;
+      bottom: 70px;
+      transform: translateX(-50%);
+
+      .text {
+        margin-left: 10px;
+      }
     }
   }
 
@@ -58,17 +72,6 @@
           padding-top: 6px;
         }
       }
-    }
-  }
-
-  .footer {
-    position: absolute;
-    left: 50%;
-    bottom: 70px;
-    transform: translateX(-50%);
-
-    .text {
-      margin-left: 10px;
     }
   }
 }

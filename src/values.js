@@ -1,3 +1,5 @@
+import Emitter from 'utils/Emitter'
+
 class Values {
   constructor() {
     this.body = document.body
@@ -17,6 +19,7 @@ class Values {
   }
 
   onResize = () => {
+    Emitter.emit('resize')
     this.viewport = {
       width: window.innerWidth,
       height: window.innerHeight

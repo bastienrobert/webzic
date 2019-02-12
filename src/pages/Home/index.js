@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 
 import Typography from 'components/typography'
+import Link from 'components/shared/Link'
+import Embed from './Embed'
 import {
   Arrow as ArrowIcon,
   Plus as PlusIcon,
@@ -10,7 +12,6 @@ import {
 } from 'components/icons'
 
 import css from './styles.scss'
-import Separator from 'components/shared/Separator'
 
 export default class Home extends Component {
   render() {
@@ -23,30 +24,41 @@ export default class Home extends Component {
           <ArrowIcon className={css.top} />
           <ArrowIcon className={css.bottom} />
         </div>
+        <div className={css.center}>
+          <div className={css.footer}>
+            <DoubleIcon />
+            <Typography subtitle className={css.text}>
+              <span>drag up or down to open</span>
+            </Typography>
+          </div>
+          <Embed
+            title="Bastien Robert - Experience"
+            src="http://bastienrobert-sound.surge.sh/"
+            className={css.iframe}
+            fullscreen
+          />
+        </div>
         <div className={css.right}>
           <div className={css.top}>
-            <ChartIcon />
-            <Typography subtitle className={css.text}>
-              <span>23</span>
-            </Typography>
+            <Link name="experiences">
+              <ChartIcon />
+              <Typography subtitle className={css.text}>
+                <span>23</span>
+              </Typography>
+            </Link>
           </div>
           <div className={css.bottom}>
-            <PlusIcon />
-            <Typography subtitle className={css.text}>
-              <div>
-                <span>more</span>
-                <span>info</span>
-              </div>
-            </Typography>
+            <Link name="about">
+              <PlusIcon />
+              <Typography subtitle className={css.text}>
+                <div>
+                  <span>more</span>
+                  <span>info</span>
+                </div>
+              </Typography>
+            </Link>
           </div>
         </div>
-        <div className={css.footer}>
-          <DoubleIcon />
-          <Typography subtitle className={css.text}>
-            <span>drag up or down to open</span>
-          </Typography>
-        </div>
-        <Separator />
       </div>
     )
   }

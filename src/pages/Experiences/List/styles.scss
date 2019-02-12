@@ -1,0 +1,39 @@
+$offset: 15%;
+
+.List {
+  position: relative;
+  height: 100%;
+  // height: 85%;
+  // margin-top: 15%;
+
+  .indicator {
+    position: absolute;
+    top: 0;
+    left: -2px;
+    display: inline-block;
+    height: 70px;
+    width: 3px;
+    background-color: $mercury;
+  }
+
+  .container {
+    height: 100%;
+    overflow: hidden;
+    margin-left: 70px;
+
+    a {
+      will-change: opacity;
+      transition: opacity 0.2s;
+    }
+
+    &:hover {
+      a {
+        opacity: 0.4;
+      }
+    }
+  }
+
+  .wrapper {
+    padding: $offset 0;
+  }
+}
