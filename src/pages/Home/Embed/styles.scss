@@ -1,22 +1,32 @@
 .Embed {
   position: absolute;
   display: flex;
-  top: 50%;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  transform: translateY(-50%);
   overflow: hidden;
-  border-top: 1px solid $silver;
-  // border-bottom: 1px solid $silver;
 
-  // REMOVE
-  height: 0;
+  .shutter {
+    .top,
+    .bottom {
+      position: absolute;
+      height: 50%;
+      width: 100%;
+      background-color: $wildSand;
+      z-index: 1;
+      overflow: hidden;
+    }
 
-  .iframe {
-    top: 0;
-    width: 100%;
-    height: 100%;
+    .top {
+      top: 0;
+      border-bottom: 1px solid $silver;
+    }
+
+    .bottom {
+      bottom: 0;
+      border-top: 1px solid $silver;
+    }
   }
 
   .left,
@@ -32,6 +42,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      z-index: 0;
     }
 
     .icon {
@@ -42,7 +53,19 @@
   }
 
   .center {
+    position: relative;
     flex: 1;
+
+    .overlay {
+      position: absolute;
+    }
+
+    .overlay,
+    .iframe {
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .right {

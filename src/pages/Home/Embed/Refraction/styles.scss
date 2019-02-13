@@ -1,0 +1,76 @@
+.Refraction {
+  position: absolute;
+  left: 50%;
+  user-select: none;
+
+  h1 {
+    z-index: 1;
+  }
+
+  &.top {
+    bottom: 0;
+    transform: translate(-50%, 50%);
+
+    .duplicates {
+      span:nth-child(1) {
+        transform: translateY(-50px);
+      }
+
+      span:nth-child(2) {
+        transform: translateY(-80px);
+      }
+
+      span:nth-child(3) {
+        transform: translateY(-100px);
+      }
+    }
+  }
+
+  &.bottom {
+    top: 0;
+    transform: translate(-50%, -50%);
+
+    .duplicates {
+      span:nth-child(1) {
+        transform: translateY(50px);
+      }
+
+      span:nth-child(2) {
+        transform: translateY(80px);
+      }
+
+      span:nth-child(3) {
+        transform: translateY(100px);
+      }
+    }
+  }
+
+  .text {
+    background-color: $wildSand;
+  }
+
+  .duplicates {
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    span {
+      position: absolute;
+      display: block;
+      position: absolute;
+      width: 100%;
+    }
+
+    span:nth-child(1) {
+      z-index: -1;
+    }
+
+    span:nth-child(2) {
+      z-index: -2;
+    }
+
+    span:nth-child(3) {
+      z-index: -3;
+    }
+  }
+}

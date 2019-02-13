@@ -9,6 +9,7 @@
     @include column;
     position: relative;
     height: 100%;
+    z-index: 2;
   }
 
   .top,
