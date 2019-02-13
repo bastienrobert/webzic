@@ -3,6 +3,7 @@ $offset: 15%;
 .List {
   position: relative;
   height: 100%;
+  user-select: none;
   // height: 85%;
   // margin-top: 15%;
 
@@ -20,20 +21,14 @@ $offset: 15%;
     height: 100%;
     overflow: hidden;
     margin-left: 70px;
-
-    a {
-      will-change: opacity;
-      transition: opacity 0.2s;
-    }
-
-    &:hover {
-      a {
-        opacity: 0.4;
-      }
-    }
   }
 
   .wrapper {
     padding: $offset 0;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
   }
 }

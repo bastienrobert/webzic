@@ -11,13 +11,32 @@ export default class List extends Component {
   height = 0
   container = {}
   wrapper = {}
+  mouseIsDown = false
+  mouseOnDown = {
+    x: 0,
+    y: 0
+  }
 
   componentDidMount() {
     this.onResize()
+    this.componentShouldListen()
+  }
+
+  componentShouldListen() {
+    this.wrapper.el.addEventListener('mousedown', this.onMouseDown)
+    this.wrapper.el.addEventListener('mousemove', this.onMouseMove)
+    window.addEventListener('mouseup', this.onMouseUp)
     Emitter.on('resize', this.onResize)
   }
 
   componentWillUnmount() {
+    this.componentShouldUnlisten()
+  }
+
+  componentShouldUnlisten() {
+    this.wrapper.el.removeEventListener('mousedown', this.onMouseDown)
+    this.wrapper.el.removeEventListener('mousemove', this.onMouseMove)
+    window.removeEventListener('mouseup', this.onMouseUp)
     Emitter.off('resize', this.onResize)
   }
 
@@ -29,14 +48,33 @@ export default class List extends Component {
     this.engine()
   }
 
+  onMouseDown = e => {
+    this.mouseIsDown = true
+    this.previousScroll = this.scroll
+    this.mouseOnDown = {
+      x: e.clientX,
+      y: e.clientY
+    }
+  }
+
+  onMouseMove = e => {
+    if (!this.mouseIsDown) return
+    this.scroll = this.previousScroll + e.clientY - this.mouseOnDown.y
+    this.engine()
+  }
+
+  onMouseUp = () => {
+    this.mouseIsDown = false
+  }
+
   onWheel = e => {
-    this.scroll += e.deltaY * 1.2
-    if (this.scroll > 0) this.scroll = 0
-    if (this.scroll < -this.height) this.scroll = -this.height
+    this.scroll -= e.deltaY * 1.2
     this.engine()
   }
 
   engine() {
+    if (this.scroll > 0) this.scroll = 0
+    if (this.scroll < -this.height) this.scroll = -this.height
     const progress = Math.abs(this.scroll / this.height)
     TweenMax.to(this.wrapper.el, 0.3, {
       y: this.scroll
