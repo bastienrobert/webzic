@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import i18n from 'locales'
 import { Helmet } from 'react-helmet'
+import experiences from 'app/experiences'
 
 import Typography from 'components/typography'
 import Link from 'components/shared/Link'
+import Footer from 'components/shared/Footer'
 import Embed from './Embed'
 import {
   Arrow as ArrowIcon,
@@ -14,6 +17,11 @@ import {
 import css from './styles.scss'
 
 export default class Home extends Component {
+  componentWillMount() {
+    this.experience =
+      experiences[Math.floor(Math.random() * experiences.length)]
+  }
+
   render() {
     return (
       <div className={css.Home}>
@@ -25,26 +33,13 @@ export default class Home extends Component {
           <ArrowIcon className={css.bottom} />
         </div>
         <div className={css.center}>
-          <div className={css.footer}>
-            <DoubleIcon />
-            <Typography subtitle className={css.text}>
-              <span>drag up or down to open</span>
-            </Typography>
-          </div>
-          <Embed
-            title="Bastien Robert - Experience"
-            src="http://bastienrobert-sound.surge.sh/"
-            className={css.iframe}
-            fullscreen
-          />
+          <Footer Icon={DoubleIcon} content={i18n.home.footer} />
+          <Embed className={css.iframe} {...this.experience} />
         </div>
         <div className={css.right}>
           <div className={css.top}>
             <Link name="experiences">
-              <ChartIcon />
-              <Typography subtitle className={css.text}>
-                <span>23</span>
-              </Typography>
+              <ChartIcon legend="23" />
             </Link>
           </div>
           <div className={css.bottom}>
@@ -52,8 +47,8 @@ export default class Home extends Component {
               <PlusIcon />
               <Typography subtitle className={css.text}>
                 <div>
-                  <span>more</span>
-                  <span>info</span>
+                  <span>{i18n.cta.more}</span>
+                  <span>{i18n.cta.info}</span>
                 </div>
               </Typography>
             </Link>

@@ -70,7 +70,7 @@ export default class Embed extends Component {
   }
 
   onMouseUp = () => {
-    this.progress = this.progress > 30 ? 40 : 0
+    this.progress = this.progress > 20 ? 40 : 0
     this.engine(true)
     this.mouseIsDown = false
   }
@@ -96,46 +96,55 @@ export default class Embed extends Component {
     this.iconsAreVisible = foreground
   }
 
-  onOverlayClick = () => {
-    console.log('CLICK ON OVERFLOW')
-  }
-
   render() {
     this.shutter = {}
-    const { src, title } = this.props
+    const { name, experience, socials, slug } = this.props
 
     return (
       <div className={css.Embed} ref="component">
         <div className={css.shutter}>
           <div className={css.top} ref={el => el && (this.shutter.top = el)}>
-            <Refraction top />
+            <Refraction name={name} top />
           </div>
           <div
             className={css.bottom}
             ref={el => el && (this.shutter.bottom = el)}>
-            <Refraction bottom />
+            <Refraction name={name} bottom />
           </div>
         </div>
         <div className={css.left}>
           <div className={css.icons} ref="icons">
-            <Link href="/">
-              <TwitterIcon className={css.icon} color={colors.silver} />
-            </Link>
-            <Link href="/">
-              <GithubIcon className={css.icon} color={colors.silver} />
-            </Link>
-            <Link href="/">
-              <CursorIcon className={css.icon} color={colors.silver} />
-            </Link>
+            {socials.twitter && (
+              <Link href={`https://twitter.com/${socials.twitter}`} external>
+                <TwitterIcon className={css.icon} color={colors.silver} />
+              </Link>
+            )}
+            {socials.github && (
+              <Link href={`https://github.com/${socials.github}`} external>
+                <GithubIcon className={css.icon} color={colors.silver} />
+              </Link>
+            )}
+            {socials.website && (
+              <Link href={socials.website} external>
+                <CursorIcon className={css.cursor} color={colors.silver} />
+              </Link>
+            )}
           </div>
         </div>
         <div className={css.center} ref="center">
-          <div
-            className={css.overlay}
-            ref="overlay"
-            onClick={this.onOverlayClick}
+          <Link name="experience" params={{ slug }}>
+            <div
+              className={css.overlay}
+              ref="overlay"
+              onClick={this.onOverlayClick}
+            />
+          </Link>
+          <iframe
+            src={experience}
+            title={`${name} - Experience`}
+            className={css.iframe}
+            ref="iframe"
           />
-          <iframe src={src} title={title} className={css.iframe} ref="iframe" />
         </div>
         <div className={css.right}>
           <Typography subtitle className={css.content}>

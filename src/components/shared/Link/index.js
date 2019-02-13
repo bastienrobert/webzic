@@ -9,12 +9,13 @@ export default class Link extends Component {
   static defaultProps = { href: '/' }
 
   render() {
-    const { name, params, href, children, className } = this.props
+    const { name, params, href, external, className, children } = this.props
     const componentStyle = classnames(css.Link, className)
 
     return (
       <a
         className={componentStyle}
+        target={external ? '_blank' : null}
         href={
           name
             ? params

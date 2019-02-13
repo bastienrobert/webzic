@@ -3,8 +3,17 @@ export default {
     title: 'sound experiments',
     subtitle: 'Gobelins students present'
   },
-  home: {
+  cta: {
     more: 'more',
-    info: 'info'
+    info: 'info',
+    close: 'close',
+    this: 'this'
+  },
+  home: {
+    footer: 'drag up or down to open'
+  },
+  about: {
+    title: 'sound experiment',
+    footer: 'coded by Bastien, designed by Launde'
   }
 }

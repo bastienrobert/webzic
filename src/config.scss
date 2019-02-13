@@ -33,6 +33,11 @@ $tundora: #484848; // Separator on dark theme
   max-width: 200px;
 }
 
+@mixin small-column() {
+  width: 6%;
+  max-width: 100px;
+}
+
 //////////////////////////
 //        FONTS         //
 //////////////////////////

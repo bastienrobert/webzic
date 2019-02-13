@@ -19,52 +19,34 @@
   }
 
   .left {
-    left: 0;
     border-right: 1px solid $silver;
 
     .top {
       top: 70px;
-      transform: translateX(-40%) rotate(45deg);
+      transform: translateX(-50%) rotate(45deg);
     }
 
     .bottom {
       bottom: 70px;
-      transform: translateX(-40%) rotate(225deg);
+      transform: translateX(-50%) rotate(225deg);
     }
   }
 
   .center {
     flex: 1;
-
-    .footer {
-      position: absolute;
-      left: 50%;
-      bottom: 70px;
-      transform: translateX(-50%);
-      z-index: 2;
-
-      .text {
-        margin-left: 10px;
-      }
-    }
   }
 
   .right {
-    right: 0;
     border-left: 1px solid $silver;
 
     .top {
       top: 70px;
-      transform: translateX(-40%);
-
-      .text {
-        display: block;
-      }
+      transform: translateX(-50%);
     }
 
     .bottom {
       bottom: 70px;
-      transform: translateX(-40%) rotate(-90deg);
+      transform: translateX(-50%) rotate(-90deg);
 
       .text {
         margin-left: 20px;

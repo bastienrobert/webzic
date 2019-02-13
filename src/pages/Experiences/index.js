@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import i18n from 'locales'
 import { Helmet } from 'react-helmet'
 import experiences from 'app/experiences'
 
@@ -26,8 +27,8 @@ export default class Experiences extends Component {
               <PlusIcon className={css.close} />
               <Typography subtitle className={css.text}>
                 <div>
-                  <span>close</span>
-                  <span>this</span>
+                  <span>{i18n.cta.close}</span>
+                  <span>{i18n.cta.this}</span>
                 </div>
               </Typography>
             </Link>
@@ -37,8 +38,8 @@ export default class Experiences extends Component {
               <PlusIcon />
               <Typography subtitle className={css.text}>
                 <div>
-                  <span>more</span>
-                  <span>info</span>
+                  <span>{i18n.cta.more}</span>
+                  <span>{i18n.cta.info}</span>
                 </div>
               </Typography>
             </Link>

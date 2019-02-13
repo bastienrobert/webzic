@@ -6,11 +6,11 @@
 }
 
 .title {
-  font-size: 80px;
+  font-size: 40px;
 }
 
 .name {
-  font-size: 60px;
+  font-size: 30px;
 }
 
 .subtitle {
@@ -22,10 +22,31 @@
 
 .text {
   font-family: $font;
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 20px;
   color: $mineShaft;
 }
 
 .negative {
   color: $mercury;
+}
+
+@include breakpoint($lg) {
+  .title {
+    font-size: 80px;
+  }
+
+  .name {
+    font-size: 70px;
+  }
+}
+
+@include breakpoint($md) {
+  .title {
+    font-size: 60px;
+  }
+
+  .name {
+    font-size: 50px;
+  }
 }

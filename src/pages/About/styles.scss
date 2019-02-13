@@ -1,11 +1,71 @@
 .About {
   composes: page from global;
 
-  font-family: $font;
-  background-color: red;
+  display: flex;
+  background-color: $wildSand;
 
-  .title {
-    color: $white;
-    margin-bottom: 20px;
+  .left,
+  .right {
+    @include column;
+    position: relative;
+    height: 100%;
+
+    .top {
+      position: absolute;
+      top: 70px;
+      left: 50%;
+    }
+  }
+
+  .left {
+    border-right: 1px solid $silver;
+
+    .top {
+      transform: translateX(-50%) rotate(-90deg);
+
+      .text {
+        margin-left: 20px;
+
+        span {
+          display: block;
+          padding-top: 6px;
+        }
+      }
+
+      .close {
+        transform: translate(3px, -3px) rotate(45deg);
+      }
+    }
+  }
+
+  .center {
+    position: relative;
+    flex: 1;
+
+    .title {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      text-align: center;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+  }
+
+  .right {
+    border-left: 1px solid $silver;
+
+    .top {
+      transform: translateX(-50%);
+    }
+  }
+
+  .separator {
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    width: 100%;
+    background-color: $silver;
+    transform: translateY(-50%);
   }
 }

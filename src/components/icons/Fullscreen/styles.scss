@@ -1,0 +1,31 @@
+.Fullscreen {
+  position: absolute;
+  width: 12px;
+  height: 9px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: $silver;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    transform-origin: center;
+    background-color: $wildSand;
+  }
+
+  &:before {
+    left: 3px;
+    top: -3px;
+    width: 6px;
+    height: 15px;
+  }
+
+  &:after {
+    left: 3px;
+    top: -5px;
+    width: 4px;
+    height: 19px;
+    transform: rotate(90deg);
+  }
+}

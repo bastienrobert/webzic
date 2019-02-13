@@ -1,6 +1,7 @@
 .Refraction {
   position: absolute;
-  left: 50%;
+  width: 100%;
+  text-align: center;
   user-select: none;
 
   h1 {
@@ -9,7 +10,7 @@
 
   &.top {
     bottom: 0;
-    transform: translate(-50%, 50%);
+    transform: translateY(50%);
 
     .duplicates {
       span:nth-child(1) {
@@ -28,7 +29,7 @@
 
   &.bottom {
     top: 0;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
 
     .duplicates {
       span:nth-child(1) {

@@ -8,6 +8,8 @@
   overflow: hidden;
 
   .shutter {
+    cursor: grab;
+
     .top,
     .bottom {
       position: absolute;
@@ -27,6 +29,10 @@
       bottom: 0;
       border-top: 1px solid $silver;
     }
+
+    &:active {
+      cursor: grabbing;
+    }
   }
 
   .left,
@@ -45,10 +51,15 @@
       z-index: 0;
     }
 
-    .icon {
+    .icon,
+    .cursor {
       width: 15px;
       display: block;
       margin: 20px 0;
+    }
+
+    .cursor {
+      width: 13px;
     }
   }
 
@@ -58,11 +69,13 @@
 
     .overlay {
       position: absolute;
+      top: 0;
+      left: 0;
+      cursor: pointer;
     }
 
     .overlay,
     .iframe {
-      top: 0;
       width: 100%;
       height: 100%;
     }
