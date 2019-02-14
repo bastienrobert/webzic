@@ -29,8 +29,6 @@ export default class Preview extends Component {
   }
 
   componentShouldListen() {
-    this.refs.component.addEventListener('mousedown', this.onMouseDown)
-    this.refs.component.addEventListener('mousemove', this.onMouseMove)
     document.addEventListener('mouseup', this.onMouseUp)
   }
 
@@ -39,8 +37,6 @@ export default class Preview extends Component {
   }
 
   componentShouldUnlisten() {
-    this.refs.component.removeEventListener('mousedown', this.onMouseDown)
-    this.refs.component.removeEventListener('mousemove', this.onMouseMove)
     document.removeEventListener('mouseup', this.onMouseUp)
   }
 
@@ -101,7 +97,11 @@ export default class Preview extends Component {
     const { name, experience, socials, slug } = this.props
 
     return (
-      <div className={css.Preview} ref="component">
+      <div
+        className={css.Preview}
+        ref="component"
+        onMouseDown={this.onMouseDown}
+        onMouseMove={this.onMouseMove}>
         <div className={css.shutter}>
           <div className={css.top} ref={el => el && (this.shutter.top = el)}>
             <Refraction name={name} top />

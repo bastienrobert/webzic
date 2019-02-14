@@ -48,7 +48,7 @@ export default class Experience extends Component {
           />
         </div>
         <div className={css.right}>
-          <Link name="home">
+          <Link name={negative ? 'experiences' : 'home'}>
             <PlusIcon className={css.icon} negative={negative} />
           </Link>
         </div>

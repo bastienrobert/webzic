@@ -35,8 +35,8 @@ export default class Item extends Component {
     return (
       <Typography className={css.Item} name negative>
         <span
-          onClick={this.onClick}
           ref="component"
+          onClick={this.onClick}
           onMouseEnter={this.onMouseEnter}
           onMouseLeave={this.onMouseLeave}>
           {name}

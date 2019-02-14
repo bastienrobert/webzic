@@ -27,8 +27,6 @@ export default class List extends Component {
   }
 
   componentShouldListen() {
-    this.wrapper.el.addEventListener('mousedown', this.onMouseDown)
-    this.wrapper.el.addEventListener('mousemove', this.onMouseMove)
     window.addEventListener('mouseup', this.onMouseUp)
     document.addEventListener('keydown', this.onKeyDown)
     Emitter.on('resize', this.onResize)
@@ -39,8 +37,6 @@ export default class List extends Component {
   }
 
   componentShouldUnlisten() {
-    this.wrapper.el.removeEventListener('mousedown', this.onMouseDown)
-    this.wrapper.el.removeEventListener('mousemove', this.onMouseMove)
     window.removeEventListener('mouseup', this.onMouseUp)
     document.removeEventListener('keydown', this.onKeyDown)
     Emitter.off('resize', this.onResize)
@@ -142,7 +138,11 @@ export default class List extends Component {
         <div
           className={css.container}
           ref={el => el && (this.container.el = el)}>
-          <div className={css.wrapper} ref={el => el && (this.wrapper.el = el)}>
+          <div
+            className={css.wrapper}
+            ref={el => el && (this.wrapper.el = el)}
+            onMouseDown={this.onMouseDown}
+            onMouseMove={this.onMouseMove}>
             {items.map((item, i) => (
               <Item
                 key={i}
