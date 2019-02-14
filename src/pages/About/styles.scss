@@ -9,6 +9,7 @@
     @include column;
     position: relative;
     height: 100%;
+    z-index: 2;
 
     .top {
       position: absolute;
@@ -39,16 +40,53 @@
   }
 
   .center {
-    position: relative;
     flex: 1;
+    z-index: 1;
+
+    .top,
+    .bottom {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background-color: $wildSand;
+      overflow: hidden;
+    }
 
     .title {
       position: absolute;
-      top: 50%;
-      width: 100%;
-      text-align: center;
-      transform: translateY(-50%);
       z-index: 1;
+      left: 50%;
+      user-select: none;
+    }
+
+    .hidden {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      user-select: none;
+    }
+
+    .top {
+      top: 0;
+      border-bottom: 1px solid $silver;
+
+      .title {
+        bottom: 0;
+        transform: translate(-50%, 50%);
+      }
+    }
+
+    .bottom {
+      bottom: 0;
+      border-top: 1px solid $silver;
+
+      .title {
+        top: 0;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 
@@ -58,14 +96,5 @@
     .top {
       transform: translateX(-50%);
     }
-  }
-
-  .separator {
-    position: absolute;
-    top: 50%;
-    height: 1px;
-    width: 100%;
-    background-color: $silver;
-    transform: translateY(-50%);
   }
 }

@@ -51,7 +51,7 @@ export default class Home extends Component {
           </div>
         </div>
         <div className={css.center}>
-          <Footer Icon={DoubleIcon} content={i18n.home.footer} />
+          <Footer Icon={DoubleIcon}>{i18n.home.footer}</Footer>
           <Preview className={css.iframe} {...experience} />
         </div>
         <div className={css.right}>

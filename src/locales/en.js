@@ -14,6 +14,8 @@ export default {
   },
   about: {
     title: 'sound experiment',
-    footer: 'coded by Bastien, designed by Launde'
+    coucou: 'Hello u beauty 😘',
+    footer:
+      'coded by <a href="https://twitter.com/bastienrbt" target="_blank">Bastien</a>, designed by <a href="https://twitter.com/laundemrl" target="_blank">Launde</a>'
   }
 }
