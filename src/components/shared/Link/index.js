@@ -9,7 +9,15 @@ export default class Link extends Component {
   static defaultProps = { href: '/' }
 
   render() {
-    const { name, params, href, external, className, children } = this.props
+    const {
+      name,
+      params,
+      querystring,
+      href,
+      external,
+      className,
+      children
+    } = this.props
     const componentStyle = classnames(css.Link, className)
 
     return (
@@ -19,7 +27,7 @@ export default class Link extends Component {
         href={
           name
             ? params
-              ? Router.getRouteWithParams(name, { ...params })
+              ? Router.getRouteWithParams(name, params, querystring)
               : Router.getPath(name)
             : href
         }>

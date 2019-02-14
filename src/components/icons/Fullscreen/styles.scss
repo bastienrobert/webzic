@@ -6,6 +6,13 @@
   border-style: solid;
   border-color: $silver;
 
+  &.negative {
+    &:before,
+    &:after {
+      background-color: $mineShaft;
+    }
+  }
+
   &:before,
   &:after {
     content: '';

@@ -15,6 +15,7 @@ $offset: 15%;
     height: 70px;
     width: 3px;
     background-color: $mercury;
+    z-index: 3;
   }
 
   .container {
@@ -26,6 +27,7 @@ $offset: 15%;
   .wrapper {
     padding: $offset 0;
     cursor: grab;
+    will-change: transform;
 
     &:active {
       cursor: grabbing;

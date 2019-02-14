@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
 import { TweenMax } from 'gsap/all'
 import Emitter from 'utils/Emitter'
+import values from 'values'
 
 import Item from './Item'
 
 import css from './styles.scss'
 
 export default class List extends Component {
+  animate = false
+  active = null
   scroll = 0
   height = 0
   container = {}
   wrapper = {}
+  items = []
   mouseIsDown = false
   mouseOnDown = {
     x: 0,
@@ -26,6 +30,7 @@ export default class List extends Component {
     this.wrapper.el.addEventListener('mousedown', this.onMouseDown)
     this.wrapper.el.addEventListener('mousemove', this.onMouseMove)
     window.addEventListener('mouseup', this.onMouseUp)
+    document.addEventListener('keydown', this.onKeyDown)
     Emitter.on('resize', this.onResize)
   }
 
@@ -37,15 +42,16 @@ export default class List extends Component {
     this.wrapper.el.removeEventListener('mousedown', this.onMouseDown)
     this.wrapper.el.removeEventListener('mousemove', this.onMouseMove)
     window.removeEventListener('mouseup', this.onMouseUp)
+    document.removeEventListener('keydown', this.onKeyDown)
     Emitter.off('resize', this.onResize)
   }
 
   onResize = () => {
-    this.container.height = this.container.el.offsetHeight
-    this.wrapper.width = this.wrapper.el.offsetWidth
-    this.wrapper.height = this.wrapper.el.offsetHeight
-    this.height = this.wrapper.height - this.container.height
-    this.engine()
+    this.container.bcr = this.container.el.getBoundingClientRect()
+    this.wrapper.bcr = this.wrapper.el.getBoundingClientRect()
+    this.wrapper.offset = (this.wrapper.bcr.width / 100) * 15
+    this.height = this.wrapper.bcr.height - this.container.bcr.height
+    this.active ? this.onItemClick(this.active) : this.engine()
   }
 
   onMouseDown = e => {
@@ -67,27 +73,67 @@ export default class List extends Component {
     this.mouseIsDown = false
   }
 
+  onKeyDown = e => {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
+    this.scroll += e.key === 'ArrowDown' ? 20 : -20
+    this.engine()
+  }
+
   onWheel = e => {
     this.scroll -= e.deltaY * 1.2
     this.engine()
   }
 
-  engine() {
-    if (this.scroll > 0) this.scroll = 0
-    if (this.scroll < -this.height) this.scroll = -this.height
-    const progress = Math.abs(this.scroll / this.height)
+  reset = () => {
+    this.active = null
+    this.props.reset()
+  }
+
+  onItemClick = id => {
+    this.active = id
+    this.animate = true
+    const item = this.items[id]
+    const bcr = item.bcr
+    this.scroll =
+      values.viewport.height / 2 -
+      bcr.height / 2 -
+      this.wrapper.offset -
+      (bcr.top - this.wrapper.offset) +
+      this.scroll
+    this.engine(false, this.props.onItemClick)
+  }
+
+  mouseOnItem = () => {
+    if (this.active) return
+    this.items.forEach(item => item.setOpacity(0.3))
+  }
+
+  mouseOffItem = () => {
+    this.items.forEach(item => item.setOpacity(1))
+  }
+
+  engine(check = true, callback) {
+    if (check) this.reset()
+    if (this.animate && check) return
+    if (check && this.scroll > 0) this.scroll = 0
+    if (check && this.scroll < -this.height) this.scroll = -this.height
+    const progress = check ? Math.abs(this.scroll / this.height) : 0.5
     TweenMax.to(this.wrapper.el, 0.3, {
-      y: this.scroll
+      y: this.scroll,
+      onComplete: () => {
+        this.animate = false
+        callback && callback()
+      }
     })
     TweenMax.to(this.refs.indicator, 0.3, {
       y:
-        progress *
-          (this.container.height - 70 - (this.wrapper.width / 100) * 30) +
-        (this.wrapper.width / 100) * 15
+        progress * (this.container.bcr.height - 70 - this.wrapper.offset * 2) +
+        this.wrapper.offset
     })
   }
 
   render() {
+    this.items = []
     const { items } = this.props
 
     return (
@@ -98,7 +144,15 @@ export default class List extends Component {
           ref={el => el && (this.container.el = el)}>
           <div className={css.wrapper} ref={el => el && (this.wrapper.el = el)}>
             {items.map((item, i) => (
-              <Item key={i} {...item} />
+              <Item
+                key={i}
+                id={i}
+                ref={el => el && this.items.push(el)}
+                onItemClick={this.onItemClick}
+                mouseOnItem={this.mouseOnItem}
+                mouseOffItem={this.mouseOffItem}
+                {...item}
+              />
             ))}
           </div>
         </div>

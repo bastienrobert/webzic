@@ -21,14 +21,22 @@
   .left {
     border-right: 1px solid $silver;
 
+    .top,
+    .bottom {
+      cursor: pointer;
+      width: 16px;
+      height: 16px;
+      text-align: center;
+    }
+
     .top {
       top: 70px;
-      transform: translateX(-50%) rotate(45deg);
+      transform: translateX(-50%);
     }
 
     .bottom {
       bottom: 70px;
-      transform: translateX(-50%) rotate(225deg);
+      transform: translateX(-50%) rotate(180deg);
     }
   }
 

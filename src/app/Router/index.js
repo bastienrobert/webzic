@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import page from 'page'
 
-import { generateGuid } from 'utils/helpers'
+import { generateGuid, objectToQuerystring } from 'utils/helpers'
 import routes from 'src/app/routes'
 import Houdini from 'components/houdini'
 import values from 'values'
@@ -25,9 +25,9 @@ export default class Router extends Component {
     return find ? find.paths[locale] || find.paths['all'] : null
   }
 
-  static getRouteWithParams(name, params) {
+  static getRouteWithParams(name, params, querystring) {
     const path = Router.getPath(name)
-    return Object.keys(params).reduce(
+    const route = Object.keys(params).reduce(
       (acc, key) =>
         acc.replace(
           new RegExp(':' + key + '(\\?|\\*)?', 'i'),
@@ -35,6 +35,7 @@ export default class Router extends Component {
         ),
       path
     )
+    return querystring ? route + objectToQuerystring(querystring, true) : route
   }
 
   static goto = path => {

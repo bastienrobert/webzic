@@ -14,7 +14,7 @@ import Refraction from './Refraction'
 
 import css from './styles.scss'
 
-export default class Embed extends Component {
+export default class Preview extends Component {
   shutter = {}
   progress = 0
   iconsAreVisible = false
@@ -101,7 +101,7 @@ export default class Embed extends Component {
     const { name, experience, socials, slug } = this.props
 
     return (
-      <div className={css.Embed} ref="component">
+      <div className={css.Preview} ref="component">
         <div className={css.shutter}>
           <div className={css.top} ref={el => el && (this.shutter.top = el)}>
             <Refraction name={name} top />
@@ -132,7 +132,10 @@ export default class Embed extends Component {
           </div>
         </div>
         <div className={css.center} ref="center">
-          <Link name="experience" params={{ slug }}>
+          <Link
+            name="experience"
+            params={{ slug }}
+            querystring={{ theme: 'light' }}>
             <div
               className={css.overlay}
               ref="overlay"
