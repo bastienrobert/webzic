@@ -19,24 +19,39 @@
   }
 
   .left {
+    position: relative;
     border-right: 1px solid $silver;
 
     .top,
     .bottom {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 50%;
       cursor: pointer;
-      width: 16px;
-      height: 16px;
-      text-align: center;
+    }
+
+    .icon {
+      position: absolute;
+      left: 50%;
     }
 
     .top {
-      top: 70px;
-      transform: translateX(-50%);
+      top: 0;
+
+      .icon {
+        top: 70px;
+        transform: translateX(-50%) rotate(45deg);
+      }
     }
 
     .bottom {
-      bottom: 70px;
-      transform: translateX(-50%) rotate(180deg);
+      bottom: 0;
+
+      .icon {
+        bottom: 70px;
+        transform: translateX(-50%) rotate(225deg);
+      }
     }
   }
 

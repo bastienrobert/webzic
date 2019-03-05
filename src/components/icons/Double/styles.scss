@@ -13,9 +13,31 @@
 
   div:first-child {
     top: 0;
+    animation: first-line 1s ease-in infinite alternate;
   }
 
   div:last-child {
     bottom: 0;
+    animation: second-line 1s ease-in infinite alternate;
+  }
+
+  @keyframes first-line {
+    from {
+      transform: translateY(2px);
+    }
+
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes second-line {
+    from {
+      transform: translateY(-2px);
+    }
+
+    to {
+      transform: translateY(0);
+    }
   }
 }

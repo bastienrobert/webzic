@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import i18n from 'locales'
 import { Helmet } from 'react-helmet'
+import i18n from 'locales'
 import experiences from 'app/experiences'
 
 import Typography from 'components/typography'
@@ -44,10 +44,10 @@ export default class Home extends Component {
         </Helmet>
         <div className={css.left}>
           <div className={css.top} onClick={this.onArrowClick.bind(this, -1)}>
-            <ArrowIcon />
+            <ArrowIcon className={css.icon} />
           </div>
           <div className={css.bottom} onClick={this.onArrowClick.bind(this, 1)}>
-            <ArrowIcon />
+            <ArrowIcon className={css.icon} />
           </div>
         </div>
         <div className={css.center}>

@@ -1,11 +1,7 @@
-$offset: 15%;
-
 .List {
   position: relative;
   height: 100%;
   user-select: none;
-  // height: 85%;
-  // margin-top: 15%;
 
   .indicator {
     position: absolute;
@@ -21,16 +17,16 @@ $offset: 15%;
   .container {
     height: 100%;
     overflow: hidden;
-    margin-left: 70px;
-  }
-
-  .wrapper {
-    padding: $offset 0;
+    padding-left: 70px;
     cursor: grab;
-    will-change: transform;
 
     &:active {
       cursor: grabbing;
     }
+  }
+
+  .wrapper {
+    padding: 15% 0;
+    will-change: transform;
   }
 }

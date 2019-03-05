@@ -10,6 +10,7 @@ import {
   Github as GithubIcon,
   Cursor as CursorIcon
 } from 'components/icons'
+// import Refraction from 'components/shared/Refraction'
 import Refraction from './Refraction'
 
 import css from './styles.scss'
@@ -55,7 +56,7 @@ export default class Preview extends Component {
       Math.max(
         Math.min(
           Math.abs(
-            ((e.clientY - this.mouseOnDown.y) / values.viewport.height) * 2
+            ((e.clientY - this.mouseOnDown.y) / values.viewport.height) * 3
           ),
           1
         ),
@@ -102,6 +103,7 @@ export default class Preview extends Component {
         ref="component"
         onMouseDown={this.onMouseDown}
         onMouseMove={this.onMouseMove}>
+        {/* <Refraction text={name} /> */}
         <div className={css.shutter}>
           <div className={css.top} ref={el => el && (this.shutter.top = el)}>
             <Refraction name={name} top />

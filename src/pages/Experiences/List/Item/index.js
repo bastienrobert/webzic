@@ -6,17 +6,12 @@ import Typography from 'components/typography'
 import css from './styles.scss'
 
 export default class Item extends Component {
-  get bcr() {
-    return this.refs.component.getBoundingClientRect()
-  }
-
   onClick = () => {
     this.props.onItemClick(this.props.id)
   }
 
   onMouseEnter = () => {
-    this.props.mouseOnItem()
-    this.setOpacity(1)
+    this.props.mouseOnItem(this.props.id)
   }
 
   onMouseLeave = () => {

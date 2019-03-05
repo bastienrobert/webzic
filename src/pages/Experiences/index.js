@@ -12,26 +12,22 @@ import { Plus as PlusIcon } from 'components/icons'
 import css from './styles.scss'
 
 export default class Experiences extends Component {
-  active = null
   state = {
-    experience: null
+    active: null
   }
 
-  onItemClick = () => {
-    const id = this.refs.list.active
-    if (id === this.active) return
-    this.active = id
-    const experience = experiences[id]
-    this.setState({ experience })
+  onItemClick = id => {
+    if (id === this.state.active) return
+    this.setState({ active: id })
   }
 
   reset = () => {
-    this.active = null
-    this.setState({ experience: null })
+    this.setState({ active: null })
   }
 
   render() {
-    const { experience } = this.state
+    const { active } = this.state
+    const experience = active !== null && experiences[active]
 
     return (
       <div className={css.Experiences}>
@@ -42,6 +38,7 @@ export default class Experiences extends Component {
         <div className={css.center}>
           <List
             ref="list"
+            active={active}
             items={experiences}
             onItemClick={this.onItemClick}
             reset={this.reset}

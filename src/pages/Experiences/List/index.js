@@ -9,7 +9,6 @@ import css from './styles.scss'
 
 export default class List extends Component {
   animate = false
-  active = null
   scroll = 0
   height = 0
   container = {}
@@ -43,11 +42,14 @@ export default class List extends Component {
   }
 
   onResize = () => {
+    const { active } = this.props
+
     this.container.bcr = this.container.el.getBoundingClientRect()
     this.wrapper.bcr = this.wrapper.el.getBoundingClientRect()
     this.wrapper.offset = (this.wrapper.bcr.width / 100) * 15
     this.height = this.wrapper.bcr.height - this.container.bcr.height
-    this.active ? this.onItemClick(this.active) : this.engine()
+
+    active ? this.onItemClick(active) : this.engine()
   }
 
   onMouseDown = e => {
@@ -75,36 +77,45 @@ export default class List extends Component {
     this.engine()
   }
 
+  onClick = e => {
+    if (e.target === this.container.el) this.engine()
+  }
+
   onWheel = e => {
     this.scroll -= e.deltaY * 1.2
     this.engine()
   }
 
-  reset = () => {
-    this.active = null
-    this.props.reset()
-  }
-
   onItemClick = id => {
-    this.active = id
     this.animate = true
     const item = this.items[id]
-    const bcr = item.bcr
+    const bcr = item.refs.component.getBoundingClientRect()
     this.scroll =
       values.viewport.height / 2 -
       bcr.height / 2 -
       this.wrapper.offset -
       (bcr.top - this.wrapper.offset) +
       this.scroll
-    this.engine(false, this.props.onItemClick)
+
+    this.engine(false, () => {
+      this.props.onItemClick(id)
+
+      this.items.forEach(item => {
+        item.setOpacity(0.3)
+      })
+    })
   }
 
-  mouseOnItem = () => {
-    if (this.active) return
-    this.items.forEach(item => item.setOpacity(0.3))
+  mouseOnItem = id => {
+    if (this.props.active !== null) return
+    this.items.forEach((item, i) => {
+      if (i === id) return
+      item.setOpacity(0.3)
+    })
   }
 
   mouseOffItem = () => {
+    if (this.props.active !== null) return
     this.items.forEach(item => item.setOpacity(1))
   }
 
@@ -128,6 +139,11 @@ export default class List extends Component {
     })
   }
 
+  reset() {
+    this.items.forEach(item => item.setOpacity(1))
+    this.props.reset()
+  }
+
   render() {
     this.items = []
     const { items } = this.props
@@ -137,7 +153,8 @@ export default class List extends Component {
         <div className={css.indicator} ref="indicator" />
         <div
           className={css.container}
-          ref={el => el && (this.container.el = el)}>
+          ref={el => el && (this.container.el = el)}
+          onClick={this.onClick}>
           <div
             className={css.wrapper}
             ref={el => el && (this.wrapper.el = el)}
