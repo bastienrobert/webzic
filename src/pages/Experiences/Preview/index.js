@@ -41,20 +41,6 @@ export default class Preview extends Component {
     // prettier-ignore
     TweenMax.set([this.shutter.left.el, this.shutter.right.el], { autoAlpha: 1 })
     // prettier-ignore
-    this.tl.fromTo(this.shutter.center.top, duration, {
-      yPercent: 0
-    }, {
-      yPercent: 100,
-      ease: Expo.easeOut
-    }, 0)
-    // prettier-ignore
-    this.tl.fromTo(this.shutter.center.bottom, duration, {
-      yPercent: 0
-    }, {
-      yPercent: -100,
-      ease: Expo.easeOut
-    }, 0)
-    // prettier-ignore
     this.tl.fromTo(this.shutter.center.insideTop, duration, {
       yPercent: 100
     }, {

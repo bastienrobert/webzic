@@ -25,6 +25,7 @@
       overflow: hidden;
       border-style: solid;
       border-color: $tundora;
+      will-change: transform;
     }
 
     .top {
@@ -115,19 +116,23 @@
     .shutter {
       .top div,
       .bottom div {
+        box-sizing: border-box;
         height: 100%;
         width: 100%;
         background-color: $mineShaft;
         z-index: 1;
         overflow: hidden;
+        border-style: solid;
+        border-color: $tundora;
+        will-change: transform;
       }
 
-      .top {
-        border-bottom-width: 1px;
-      }
-
-      .bottom {
+      .top div {
         border-top-width: 1px;
+      }
+
+      .bottom div {
+        border-bottom-width: 1px;
       }
     }
   }
