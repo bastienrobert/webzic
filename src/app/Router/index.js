@@ -6,7 +6,7 @@ import routes from 'src/app/routes'
 import Houdini from 'components/houdini'
 import values from 'values'
 
-// import Loader from 'components/shared/Loader'
+import Loader from 'components/shared/Loader'
 
 export default class Router extends Component {
   state = {
@@ -107,9 +107,9 @@ export default class Router extends Component {
         }
       })
 
-      currentComponent.willAppear && currentComponent.willAppear()
+      currentComponent.willAppear && currentComponent.componentWillAppear()
       controller.transition().then(() => {
-        currentComponent.didAppear && currentComponent.didAppear()
+        currentComponent.didAppear && currentComponent.componentDidAppear()
         this.destroyPage(previousGuid)
       })
     } else {
@@ -123,15 +123,11 @@ export default class Router extends Component {
         }
       })
 
-      // this.refs.loader.animateOut().then(() => {
-      //   component.willAppear && component.willAppear()
-      //   controller.transition().then(() => {
-      //     component.didAppear && component.didAppear()
-      //   })
-      // })
-      component.willAppear && component.willAppear()
-      controller.transition().then(() => {
-        component.didAppear && component.didAppear()
+      this.refs.loader.animateOut().then(() => {
+        component.willAppear && component.componentWillAppear()
+        controller.transition().then(() => {
+          component.didAppear && component.componentDidAppear()
+        })
       })
     }
   }
@@ -190,7 +186,7 @@ export default class Router extends Component {
 
     return (
       <React.Fragment>
-        {/* <Loader ref="loader" /> */}
+        <Loader ref="loader" />
         {this.state.pages.map(page => {
           return (
             <page.route.component

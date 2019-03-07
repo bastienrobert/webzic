@@ -18,16 +18,18 @@
       background-color: $wildSand;
       z-index: 1;
       overflow: hidden;
+      border-style: solid;
+      border-color: $silver;
     }
 
     .top {
       top: 0;
-      border-bottom: 1px solid $silver;
+      border-bottom-width: 1px;
     }
 
     .bottom {
       bottom: 0;
-      border-top: 1px solid $silver;
+      border-top-width: 1px;
     }
 
     &:active {

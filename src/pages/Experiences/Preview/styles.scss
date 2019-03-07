@@ -5,18 +5,74 @@
   left: 0;
   width: 100%;
   height: 40%;
-  border-top: 1px solid $tundora;
-  border-bottom: 1px solid $tundora;
-  background-color: $mineShaft;
   transform: translateY(-50%);
   z-index: 2;
   overflow: hidden;
+  user-select: none;
+
+  .shutter {
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .top,
+    .bottom {
+      box-sizing: border-box;
+      position: absolute;
+      height: 50%;
+      width: 100%;
+      overflow: hidden;
+      border-style: solid;
+      border-color: $tundora;
+    }
+
+    .top {
+      top: 0;
+    }
+
+    .bottom {
+      bottom: 0;
+    }
+  }
 
   .left,
   .right {
     @include column;
     position: relative;
     height: 100%;
+
+    .overlay {
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-style: solid;
+      border-color: $tundora;
+      border-bottom-width: 1px;
+      border-top-width: 1px;
+    }
+
+    .shutter {
+      position: absolute;
+
+      .top,
+      .bottom {
+        background-color: $mineShaft;
+        border-style: solid;
+        border-color: $tundora;
+      }
+
+      .top {
+        border-bottom-width: 1px;
+      }
+
+      .bottom {
+        border-top-width: 1px;
+      }
+    }
   }
 
   .left {
@@ -45,6 +101,7 @@
   .center {
     position: relative;
     flex: 1;
+    cursor: pointer;
 
     .text {
       position: absolute;
@@ -54,6 +111,25 @@
       margin-left: 70px;
       transform: translateY(-50%);
     }
+
+    .shutter {
+      .top div,
+      .bottom div {
+        height: 100%;
+        width: 100%;
+        background-color: $mineShaft;
+        z-index: 1;
+        overflow: hidden;
+      }
+
+      .top {
+        border-bottom-width: 1px;
+      }
+
+      .bottom {
+        border-top-width: 1px;
+      }
+    }
   }
 
   .right {
@@ -61,11 +137,6 @@
     border-left: 1px solid $tundora;
 
     .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
       z-index: 1;
     }
 

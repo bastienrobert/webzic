@@ -3,7 +3,7 @@ import css from './styles.scss'
 
 import Router from './Router'
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div id="app" className={css.App}>
@@ -14,5 +14,3 @@ class App extends Component {
     )
   }
 }
-
-export default App
