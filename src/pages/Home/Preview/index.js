@@ -18,6 +18,7 @@ import css from './styles.scss'
 export default class Preview extends Component {
   shutter = {}
   progress = 0
+  middleIsVisible = true
   iconsAreVisible = false
   mouseIsDown = false
   mouseOnDown = {
@@ -74,6 +75,7 @@ export default class Preview extends Component {
 
   engine(ease = false) {
     this.setIconIndex(false)
+    this.setMiddleVisibility()
     TweenMax.to(this.shutter.top, 0.3, {
       yPercent: -this.progress,
       ease: ease ? Expo.easeOut : null
@@ -93,6 +95,20 @@ export default class Preview extends Component {
     this.iconsAreVisible = foreground
   }
 
+  setMiddleVisibility() {
+    if (this.progress === 0) {
+      TweenMax.set(this.shutter.middle, {
+        autoAlpha: 1
+      })
+      this.middleIsVisible = true
+    } else if (this.middleIsVisible && this.progress !== 0) {
+      TweenMax.set(this.shutter.middle, {
+        autoAlpha: 0
+      })
+      this.middleIsVisible = false
+    }
+  }
+
   render() {
     this.shutter = {}
     const { name, experience, socials, slug } = this.props
@@ -107,6 +123,13 @@ export default class Preview extends Component {
         <div className={css.shutter}>
           <div className={css.top} ref={el => el && (this.shutter.top = el)}>
             <Refraction name={name} top />
+          </div>
+          <div
+            className={css.middle}
+            ref={el => el && (this.shutter.middle = el)}>
+            <Typography title>
+              <h1>{name}</h1>
+            </Typography>
           </div>
           <div
             className={css.bottom}
