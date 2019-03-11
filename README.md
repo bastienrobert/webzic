@@ -1,5 +1,7 @@
 # Webzic
 
-BDDI 2019 portfolio for Vusic experiences.
+## TODO
 
-Built in React using create-react-app and react-spring for animations.
+- Fonts replace PX with VW and set breakpoint
+- Page transitions
+- Refraction DOM effect
