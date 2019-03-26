@@ -1,7 +1,4 @@
 import { TimelineMax } from 'gsap/all'
-import CSSPlugin from 'gsap/CSSPlugin'
-
-const c = CSSPlugin // eslint-disable-line
 
 class TransitionController {
   constructor(props) {

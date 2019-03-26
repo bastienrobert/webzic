@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { TweenMax, Expo } from 'gsap/all'
 import SplitText from 'utils/gsapPlugins/SplitText.js'
 import i18n from 'locales'
-import values from 'values'
 
 import Typography from 'components/typography'
 import Separator from 'components/shared/Separator'
